@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoviSimple - Estructura de Datos</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Pantalla de Bienvenida -->
+        <div id="welcome-screen" class="screen active">
+            <div class="welcome-content">
+                <div class="logo">
+                    <div class="logo-icon">MS</div>
+                    <h1>MoviSimple</h1>
+                </div>
+                <p class="subtitle">La odisea de los seis puntos</p>
+                <p class="description">Aplicación para estructura de datos que implementa el algoritmo de Dijkstra</p>
+                <div class="button-group">
+                    <button id="to-login-btn" class="btn primary-btn">Iniciar Sesión</button>
+                    <button id="to-register-btn" class="btn secondary-btn">Registrarse</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla de Registro -->
+        <div id="register-screen" class="screen">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <button id="register-back-btn" class="back-btn">&larr;</button>
+                    <h2>Crear Cuenta</h2>
+                </div>
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="register-name">Nombre</label>
+                        <input type="text" id="register-name" placeholder="Ingresa tu nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Correo electrónico</label>
+                        <input type="email" id="register-email" placeholder="Ingresa tu correo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Contraseña</label>
+                        <input type="password" id="register-password" placeholder="Crea una contraseña" required>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Registrarse</button>
+                </form>
+                <p class="auth-link">¿Ya tienes una cuenta? <a href="#" id="register-to-login">Iniciar sesión</a></p>
+            </div>
+        </div>
+
+        <!-- Pantalla de Login -->
+        <div id="login-screen" class="screen">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <button id="login-back-btn" class="back-btn">&larr;</button>
+                    <h2>Iniciar Sesión</h2>
+                </div>
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">Correo electrónico</label>
+                        <input type="email" id="login-email" placeholder="Ingresa tu correo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Contraseña</label>
+                        <input type="password" id="login-password" placeholder="Ingresa tu contraseña" required>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Iniciar Sesión</button>
+                </form>
+                <p class="auth-link">¿No tienes una cuenta? <a href="#" id="login-to-register">Registrarse</a></p>
+            </div>
+        </div>
+
+        <!-- Pantalla Principal -->
+        <div id="main-screen" class="screen">
+            <header class="main-header">
+                <div class="logo">
+                    <div class="logo-icon">MS</div>
+                    <h1>MoviSimple</h1>
+                </div>
+                <div class="user-info">
+                    <span id="user-name">Usuario</span>
+                    <button id="logout-btn" class="btn small-btn">Cerrar Sesión</button>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <section class="route-section">
+                    <h2>Selección de Ruta</h2>
+                    <div class="route-selection">
+                        <div class="select-group">
+                            <label for="origin-select">Origen</label>
+                            <select id="origin-select">
+                                <option value="" disabled selected>Selecciona origen</option>
+                                <option value="0">Nodo 1</option>
+                                <option value="1">Nodo 2</option>
+                                <option value="2">Nodo 3</option>
+                                <option value="3">Nodo 4</option>
+                                <option value="4">Nodo 5</option>
+                                <option value="5">Nodo 6</option>
+                            </select>
+                        </div>
+                        <div class="select-group">
+                            <label for="destination-select">Destino</label>
+                            <select id="destination-select">
+                                <option value="" disabled selected>Selecciona destino</option>
+                                <option value="0">Nodo 1</option>
+                                <option value="1">Nodo 2</option>
+                                <option value="2">Nodo 3</option>
+                                <option value="3">Nodo 4</option>
+                                <option value="4">Nodo 5</option>
+                                <option value="5">Nodo 6</option>
+                            </select>
+                        </div>
+                        <button id="calculate-route-btn" class="btn primary-btn">Calcular Ruta</button>
+                    </div>
+                </section>
+
+                <section class="graph-section">
+                    <h2>Grafo de Rutas</h2>
+                    <div class="graph-legend">
+                        <div class="legend-item">
+                            <span class="legend-color origin"></span>
+                            <span>Origen</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color destination"></span>
+                            <span>Destino</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color path"></span>
+                            <span>Ruta</span>
+                        </div>
+                    </div>
+                    <div class="graph-container">
+                        <canvas id="graph-canvas" width="600" height="400"></canvas>
+                    </div>
+                </section>
+
+                <section id="route-info" class="route-info hidden">
+                    <h2>Progreso de la Ruta</h2>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div id="progress-fill"></div>
+                        </div>
+                        <div id="progress-text">0%</div>
+                    </div>
+
+                    <div id="route-results" class="route-results hidden">
+                        <div class="result-card">
+                            <div class="result-item">
+                                <h3>Tiempo Total:</h3>
+                                <p><span id="total-time">0</span> segundos</p>
+                            </div>
+                            <div class="result-item">
+                                <h3>Costo Total:</h3>
+                                <p>$<span id="total-cost">0.00</span></p>
+                            </div>
+                            <button id="new-route-btn" class="btn secondary-btn">Nueva Ruta</button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="main-footer">
+                <p>MoviSimple &copy; 2025 - Implementación de Dijkstra para Estructura de Datos</p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/graph.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
